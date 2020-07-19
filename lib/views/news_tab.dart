@@ -59,21 +59,11 @@ class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
                       textAlign: TextAlign.center,
                     ),
                   )
-                : OrientationBuilder(
-                    builder: (context, orientation) => GridView.count(
-                        childAspectRatio: 0.85,
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        crossAxisCount:
-                            orientation == Orientation.portrait ? 1 : 2,
-                        children: articles
-                            .map((article) => _buildArticleCard(article))
-                            .toList()),
-                  )
-            // ListView.builder(
-            //     itemCount: totalResults,
-            //     itemBuilder: (BuildContext context, int index) =>
-            //         _buildArticleCard(articles[index]),
-            // ),
+                : ListView.builder(
+                itemCount: totalResults,
+                itemBuilder: (BuildContext context, int index) =>
+                    _buildArticleCard(articles[index]),
+            ),
             );
   }
 
@@ -115,10 +105,7 @@ class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  flex: article.description != '' ? 7: 5,
-                  child: SizedBox.expand(
-                    child: CachedNetworkImage(
+                CachedNetworkImage(
                       fit: BoxFit.fitWidth,
                       imageUrl: article.urlToImage,
                       progressIndicatorBuilder:
@@ -128,44 +115,26 @@ class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
                       errorWidget: (context, _, __) =>
                           Center(child: Icon(Icons.error)),
                     ),
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: Container(
+                Padding(
                     padding: EdgeInsets.only(top: 16, bottom: 8),
-                    child: Center(
-                      child: Text(
+                    child: Text(
                         '\"${article.title}\"',
-                        maxLines: article.description != '' ? 3: 4,
                         softWrap: true,
                         style: Theme.of(context)
                             .textTheme
                             .headline3
                             .copyWith(fontSize: 24, color: Colors.black),
-                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
                   ),
-                ),
-                if (article.description != '')
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      child: Text(
+                Text(
                         article.description,
                         maxLines: 3,
                         softWrap: true,
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
-                    ),
-                  ),
-                Expanded(
-                  flex: 1,
-                  child: Container(
+                Padding(
                       padding: EdgeInsets.only(top: 8),
-                      child: _buildPublishedAtRow(article.publishedAt)),
-                )
+                      child: _buildPublishedAtRow(article.publishedAt),),
               ],
             ),
           ),
