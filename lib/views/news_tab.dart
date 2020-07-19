@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/article.dart';
-import 'package:news_app/article_web_view.dart';
-import 'package:news_app/news_api.dart';
+import 'package:news_app/data/article.dart';
+import 'package:news_app/views/article_web_view.dart';
+import 'package:news_app/services/news_api.dart';
 import 'package:intl/intl.dart';
 
 final DateFormat _dateFormat = DateFormat('dd/MM/yyyy');

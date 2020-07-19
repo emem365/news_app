@@ -1,5 +1,5 @@
-import 'package:news_app/api_key.dart';
-import 'package:news_app/response.dart';
+import 'package:news_app/constants/api_key.dart';
+import 'package:news_app/data/response.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
