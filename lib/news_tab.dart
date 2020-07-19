@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/article.dart';
+import 'package:news_app/article_web_view.dart';
 import 'package:news_app/news_api.dart';
 import 'package:intl/intl.dart';
 
@@ -86,7 +87,13 @@ class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
         child: InkWell(
           splashColor: Colors.grey[500],
           onTap: () {
-            print('${article.title} Pressed');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    ArticleWebView(title: article.title, url: article.url),
+              ),
+            );
           },
           child: Padding(
             padding: EdgeInsets.all(16),
