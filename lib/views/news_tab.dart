@@ -51,20 +51,22 @@ class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
         : RefreshIndicator(
             onRefresh: loadArticles,
             child: isError
-                ? SingleChildScrollView(
+                ? ListView(
                     padding: EdgeInsets.only(top: 20),
-                    child: Text(
-                      'Error loading data.\nPlease check your internet connection!',
-                      style: Theme.of(context).textTheme.bodyText1,
-                      textAlign: TextAlign.center,
-                    ),
+                    children: [
+                      Text(
+                        'Error loading data.\nPlease check your internet connection!',
+                        style: Theme.of(context).textTheme.bodyText1,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   )
                 : ListView.builder(
-                itemCount: totalResults,
-                itemBuilder: (BuildContext context, int index) =>
-                    _buildArticleCard(articles[index]),
-            ),
-            );
+                    itemCount: totalResults,
+                    itemBuilder: (BuildContext context, int index) =>
+                        _buildArticleCard(articles[index]),
+                  ),
+          );
   }
 
   Widget _buildPublishedAtRow(DateTime datetime) => Row(
@@ -106,35 +108,36 @@ class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CachedNetworkImage(
-                      fit: BoxFit.fitWidth,
-                      imageUrl: article.urlToImage,
-                      progressIndicatorBuilder:
-                          (context, _, downloadProgress) => Center(
-                              child: CircularProgressIndicator(
-                                  value: downloadProgress.progress)),
-                      errorWidget: (context, _, __) =>
-                          Center(child: Icon(Icons.error)),
-                    ),
+                  fit: BoxFit.fitWidth,
+                  imageUrl: article.urlToImage,
+                  progressIndicatorBuilder: (context, _, downloadProgress) =>
+                      Center(
+                          child: CircularProgressIndicator(
+                              value: downloadProgress.progress)),
+                  errorWidget: (context, _, __) =>
+                      Center(child: Icon(Icons.error)),
+                ),
                 Padding(
-                    padding: EdgeInsets.only(top: 16, bottom: 8),
-                    child: Text(
-                        '\"${article.title}\"',
-                        softWrap: true,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline3
-                            .copyWith(fontSize: 24, color: Colors.black),
-                      ),
+                  padding: EdgeInsets.only(top: 16, bottom: 8),
+                  child: Text(
+                    '\"${article.title}\"',
+                    softWrap: true,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline3
+                        .copyWith(fontSize: 24, color: Colors.black),
                   ),
+                ),
                 Text(
-                        article.description,
-                        maxLines: 3,
-                        softWrap: true,
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
+                  article.description,
+                  maxLines: 3,
+                  softWrap: true,
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
                 Padding(
-                      padding: EdgeInsets.only(top: 8),
-                      child: _buildPublishedAtRow(article.publishedAt),),
+                  padding: EdgeInsets.only(top: 8),
+                  child: _buildPublishedAtRow(article.publishedAt),
+                ),
               ],
             ),
           ),
