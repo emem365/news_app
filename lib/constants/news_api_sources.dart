@@ -1,7 +1,7 @@
 List<Map<String, String>> newsApiSources = [
   {
-    'source-id': 'abc-news',
-    'name': 'ABC News'
+    'source-id': 'engadget',
+    'name': 'Engadget'
   },
   {
     'source-id': 'google-news',

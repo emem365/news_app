@@ -12,10 +12,14 @@ class NewsAPI {
 
   Future<Response> getTopHeadlinesFromSource(String source) async {
     String requestURL = "$url/top-headlines?sources=$source&apiKey=$apiKey";
-    var response = await http.get(requestURL);
-    if (response.statusCode != 200) {
-      return Future.error(response.statusCode);
+    try {
+      var response = await http.get(requestURL);
+      if (response.statusCode != 200) {
+        return Future.error(response.statusCode);
+      }
+      return parseResponse(response);
+    } catch (err) {
+      return Future.error(err);
     }
-    return parseResponse(response);
   }
 }

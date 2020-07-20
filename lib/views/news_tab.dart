@@ -88,11 +88,11 @@ class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
         ],
       );
   Widget _buildArticleCard(Article article) => Card(
-        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(16))),
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         elevation: 5,
-        color: Colors.grey[400],
         child: InkWell(
-          splashColor: Colors.grey[500],
           onTap: () {
             Navigator.push(
               context,
@@ -102,44 +102,52 @@ class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
               ),
             );
           },
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CachedNetworkImage(
-                  fit: BoxFit.fitWidth,
-                  imageUrl: article.urlToImage,
-                  progressIndicatorBuilder: (context, _, downloadProgress) =>
-                      Center(
-                          child: CircularProgressIndicator(
-                              value: downloadProgress.progress)),
-                  errorWidget: (context, _, __) =>
-                      Center(child: Icon(Icons.error)),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 16, bottom: 8),
-                  child: Text(
-                    '\"${article.title}\"',
-                    softWrap: true,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3
-                        .copyWith(fontSize: 24, color: Colors.black),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                constraints: BoxConstraints(minHeight: 150),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.fitWidth,
+                    imageUrl: article.urlToImage,
+                    progressIndicatorBuilder: (context, _, downloadProgress) =>
+                        Center(
+                            child: CircularProgressIndicator(
+                                value: downloadProgress.progress)),
+                    errorWidget: (context, _, __) =>
+                        Center(child: Icon(Icons.error)),
                   ),
                 ),
-                Text(
-                  article.description,
-                  maxLines: 3,
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                child: Text(
+                  '\"${article.title}\"',
                   softWrap: true,
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline3
+                      .copyWith(fontSize: 20, color: Colors.black),
                 ),
+              ),
+              if (article.description != '')
                 Padding(
-                  padding: EdgeInsets.only(top: 8),
-                  child: _buildPublishedAtRow(article.publishedAt),
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                  child: Text(
+                    article.description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: true,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
                 ),
-              ],
-            ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                child: _buildPublishedAtRow(article.publishedAt),
+              ),
+            ],
           ),
         ),
       );

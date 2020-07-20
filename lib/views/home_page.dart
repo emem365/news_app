@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
-          leading: BackButton(),
+          centerTitle: true,
         ),
         body: Column(
           children: <Widget>[
