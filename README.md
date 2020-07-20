@@ -1,6 +1,6 @@
 # News App
 
-<!--- <img src="previews/welcome.jpg" width="250"/> <img src="previews/randomjoke.jpg" width="250"/> <img src="previews/searchjoke.jpg" width="250"/> --->
+<img src="previews/home.jpg" width="250"/> <img src="previews/webview.jpg" width="250"/> 
 
 A demo news application which will get top headlines from all your favourite sources! API in use can be found at [News API](https://newsapi.org/)
 
