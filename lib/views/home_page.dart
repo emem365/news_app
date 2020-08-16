@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/constants/news_api_sources.dart';
 import 'package:news_app/views/news_tab.dart';
-
+import 'package:news_app/widgets/app_drawer.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
           title: Text(widget.title),
           centerTitle: true,
         ),
+        drawer: AppDrawer(),
         body: Column(
           children: <Widget>[
             PreferredSize(
@@ -50,4 +51,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
