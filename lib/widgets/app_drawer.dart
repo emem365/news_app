@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/views/sources_page.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -32,8 +33,7 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text('Home'),
-            onTap: () {
-            },
+            onTap: () {},
           ),
           ListTile(
             title: Text('View News by region'),
@@ -45,7 +45,10 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text('Select your sources'),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => SourcesPage()));
+            },
           ),
           Divider(),
           ListTile(

@@ -17,7 +17,7 @@ class _$NewsAPI extends NewsAPI {
   final definitionType = NewsAPI;
 
   @override
-  Future<Response<BuiltList<Source>>> getSources(
+  Future<Response<SourcesResponse>> getSources(
       {String category, String language, String country}) {
     final $url = '/sources';
     final $params = <String, dynamic>{
@@ -26,7 +26,38 @@ class _$NewsAPI extends NewsAPI {
       'country': country
     };
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
-    return client.send<BuiltList<Source>, Source>($request);
+    return client.send<SourcesResponse, SourcesResponse>($request);
+  }
+
+  @override
+  Future<Response<HeadlinesResponse>> getEverything(
+      {String query,
+      String queryInTitle,
+      List<String> sources,
+      List<String> domains,
+      List<String> excludeDomains,
+      String from,
+      String to,
+      String language,
+      String sortBy,
+      String pageSize,
+      String page}) {
+    final $url = '/everything';
+    final $params = <String, dynamic>{
+      'q': query,
+      'qInTitle': queryInTitle,
+      'sources': sources,
+      'domains': domains,
+      'excludeDomains': excludeDomains,
+      'from': from,
+      'to': to,
+      'language': language,
+      'sortBy': sortBy,
+      'pageSize': pageSize,
+      'page': page
+    };
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client.send<HeadlinesResponse, HeadlinesResponse>($request);
   }
 
   @override
