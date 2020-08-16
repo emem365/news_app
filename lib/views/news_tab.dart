@@ -18,19 +18,24 @@ class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
   bool isError = false;
   String errorMessage = '';
 
-  Future<void> loadArticles() =>
-      NewsAPI.create().getTopHeadlinesFromSource(widget.source).then(
-          (response) => setState(() {
-                isLoading = false;
-                isError = false;
-                totalResults = response.body.totalResults;
-                articles = response.body.articles;
-              }),
-          onError: (error) => setState(() {
-                isLoading = false;
-                isError = true;
-                errorMessage = '$error';
-              }));
+  Future<void> loadArticles() => NewsAPI.create()
+          .getTopHeadlinesFromSource(widget.source)
+          .then((response) {
+        if (mounted)
+          setState(() {
+            isLoading = false;
+            isError = false;
+            totalResults = response.body.totalResults;
+            articles = response.body.articles;
+          });
+      }, onError: (error) {
+        if (mounted)
+          setState(() {
+            isLoading = false;
+            isError = true;
+            errorMessage = '$error';
+          });
+      });
 
   @override
   bool get wantKeepAlive => true;

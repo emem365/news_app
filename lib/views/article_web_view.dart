@@ -46,7 +46,13 @@ class _ArticleWebViewState extends State<ArticleWebView> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.open_in_browser),
+                    Icon(
+                      Icons.open_in_browser,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 4,
+                    ),
                     Text('Open in Browser'),
                   ],
                 ),
