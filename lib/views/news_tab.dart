@@ -1,6 +1,7 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/data/article.dart';
-import 'package:news_app/services/news_api.dart';
+import 'package:news_app/models/article.dart';
+import 'package:news_app/data/news_api.dart';
 import 'package:news_app/widgets/article_card.dart';
 
 class NewsTab extends StatefulWidget {
@@ -13,17 +14,17 @@ class NewsTab extends StatefulWidget {
 class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
   bool isLoading = true;
   int totalResults;
-  List<Article> articles;
+  BuiltList<Article> articles;
   bool isError = false;
   String errorMessage = '';
 
   Future<void> loadArticles() =>
-      NewsAPI().getTopHeadlinesFromSource(widget.source).then(
+      NewsAPI.create().getTopHeadlinesFromSource(widget.source).then(
           (response) => setState(() {
                 isLoading = false;
                 isError = false;
-                totalResults = response.totalResults;
-                articles = response.articles;
+                totalResults = response.body.totalResults;
+                articles = response.body.articles;
               }),
           onError: (error) => setState(() {
                 isLoading = false;

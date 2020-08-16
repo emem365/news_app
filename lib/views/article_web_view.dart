@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ArticleWebView extends StatefulWidget {
   final String title;
@@ -28,19 +29,52 @@ class _ArticleWebViewState extends State<ArticleWebView> {
           overflow: TextOverflow.ellipsis,
         ),
         leading: BackButton(),
+        actions: [
+          PopupMenuButton(
+            onSelected: (String value) async {
+              if (value == 'OPEN_IN_BROWSER')
+                try {
+                  await _launchURL(widget.url);
+                } catch (e) {
+                  Scaffold.of(context)
+                      .showSnackBar(SnackBar(content: Text(e.toString())));
+                }
+            },
+            itemBuilder: (BuildContext context) => [
+              PopupMenuItem(
+                value: 'OPEN_IN_BROWSER',
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.open_in_browser),
+                    Text('Open in Browser'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       body: Column(
         children: <Widget>[
           if (pageIsLoading) LinearProgressIndicator(),
           Expanded(
             child: WebView(
-                initialUrl: widget.url,
-                javascriptMode: JavascriptMode.unrestricted,
-                onPageFinished: (_) => onPageLoaded(),
-              ),
+              initialUrl: widget.url,
+              javascriptMode: JavascriptMode.unrestricted,
+              onPageFinished: (_) => onPageLoaded(),
+            ),
           ),
         ],
       ),
     );
+  }
+}
+
+_launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

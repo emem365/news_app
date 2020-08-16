@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/data/article.dart';
+import 'package:news_app/models/article.dart';
+
 import 'package:news_app/views/article_web_view.dart';
 import 'package:news_app/constants/date_format.dart';
 
@@ -55,7 +56,7 @@ class ArticleCard extends StatelessWidget {
                     .copyWith(fontSize: 20, color: Colors.black),
               ),
             ),
-            if (article.description != '')
+            if (article.description != null && article.description != '')
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                 child: Text(
@@ -68,8 +69,7 @@ class ArticleCard extends StatelessWidget {
               ),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-              child: _buildPublishedAtRow(
-                  article.publishedAt, Theme.of(context).textTheme),
+              child: _buildPublishedAtRow(Theme.of(context).textTheme),
             ),
           ],
         ),
@@ -77,22 +77,25 @@ class ArticleCard extends StatelessWidget {
     );
   }
 
-  Widget _buildPublishedAtRow(DateTime datetime, TextTheme _textTheme) => Row(
+  Widget _buildPublishedAtRow(TextTheme _textTheme){
+    DateTime dateTime = DateTime.parse(article.publishedAt).toLocal();
+    return Row(
         children: <Widget>[
           Expanded(
             child: Text(
-              'Date : ${dateFormat.format(datetime)}',
+              'Date : ${dateFormat.format(dateTime)}',
               softWrap: true,
               style: _textTheme.subtitle1,
             ),
           ),
           Expanded(
             child: Text(
-              'Time : ${datetime.hour}:${datetime.minute} ${datetime.timeZoneName}',
+              'Time : ${dateTime.hour}:${dateTime.minute} ${dateTime.timeZoneName}',
               softWrap: true,
               style: _textTheme.subtitle1,
             ),
           ),
         ],
       );
+  }
 }
