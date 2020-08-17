@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:news_app/controllers/sources_page_controller.dart';
-import 'package:news_app/data/service_locator.dart';
-import 'package:news_app/views/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app/src/controllers/sources_page_controller.dart';
+import 'package:news_app/src/data/service_locator.dart';
+import 'package:news_app/src/views/home_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {

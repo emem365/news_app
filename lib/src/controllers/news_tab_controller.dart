@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:news_app/data/news_api.dart';
-import 'package:news_app/data/persistent_database.dart';
-import 'package:news_app/data/service_locator.dart';
-import 'package:news_app/models/article.dart';
+import 'package:news_app/src/data/news_api.dart';
+import 'package:news_app/src/data/persistent_database.dart';
+import 'package:news_app/src/data/service_locator.dart';
+import 'package:news_app/src/models/article.dart';
 
 class NewsTabController extends ChangeNotifier {
   final PersistentSource source;

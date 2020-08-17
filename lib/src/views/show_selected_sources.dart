@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/data/persistent_database.dart';
-import 'package:news_app/data/service_locator.dart';
+import 'package:news_app/src/data/persistent_database.dart';
+import 'package:news_app/src/data/service_locator.dart';
 
 class ShowSelectedSources extends StatelessWidget {
   @override

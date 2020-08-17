@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:news_app/data/news_api.dart';
-import 'package:news_app/data/service_locator.dart';
-import 'package:news_app/models/source.dart';
+import 'package:news_app/src/data/news_api.dart';
+import 'package:news_app/src/data/service_locator.dart';
+import 'package:news_app/src/models/source.dart';
 
 class SourcesPageController extends ChangeNotifier {
   SourcesPageController() {

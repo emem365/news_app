@@ -1,8 +1,8 @@
 import 'package:chopper/chopper.dart';
 import 'package:news_app/constants/api_key.dart';
-import 'package:news_app/models/headlines_response.dart';
-import 'package:news_app/data/built_value_converter.dart';
-import 'package:news_app/models/sources_response.dart';
+import 'package:news_app/src/models/headlines_response.dart';
+import 'package:news_app/src/data/built_value_converter.dart';
+import 'package:news_app/src/models/sources_response.dart';
 
 part 'news_api.chopper.dart';
 

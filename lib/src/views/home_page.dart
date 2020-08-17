@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/controllers/news_tab_controller.dart';
-import 'package:news_app/data/persistent_database.dart';
-import 'package:news_app/data/service_locator.dart';
-import 'package:news_app/views/news_tab.dart';
-import 'package:news_app/views/sources_page.dart';
-import 'package:news_app/widgets/app_drawer.dart';
+import 'package:news_app/src/controllers/news_tab_controller.dart';
+import 'package:news_app/src/data/persistent_database.dart';
+import 'package:news_app/src/data/service_locator.dart';
+import 'package:news_app/src/views/news_tab.dart';
+import 'package:news_app/src/views/sources_page.dart';
+import 'package:news_app/src/widgets/app_drawer.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {

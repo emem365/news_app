@@ -1,6 +1,6 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:news_app/models/source.dart';
+import 'package:news_app/src/models/source.dart';
 
 part 'article.g.dart';
 

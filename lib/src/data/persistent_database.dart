@@ -1,6 +1,6 @@
 import 'package:moor_flutter/moor_flutter.dart';
 import 'package:moor/moor.dart';
-import 'package:news_app/models/source.dart';
+import 'package:news_app/src/models/source.dart';
 
 part 'persistent_database.g.dart';
 

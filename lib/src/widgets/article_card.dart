@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/models/article.dart';
-
-import 'package:news_app/views/article_web_view.dart';
 import 'package:news_app/constants/date_format.dart';
+import 'package:news_app/src/models/article.dart';
+import 'package:news_app/src/views/article_web_view.dart';
 
 class ArticleCard extends StatelessWidget {
   final Article article;

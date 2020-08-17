@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/views/sources_page.dart';
+import 'package:news_app/src/views/sources_page.dart';
 
 class AppDrawer extends StatelessWidget {
   @override

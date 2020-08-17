@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/controllers/sources_page_controller.dart';
-import 'package:news_app/data/persistent_database.dart';
-import 'package:news_app/data/service_locator.dart';
-import 'package:news_app/views/show_selected_sources.dart';
+import 'package:news_app/src/controllers/sources_page_controller.dart';
+import 'package:news_app/src/data/persistent_database.dart';
+import 'package:news_app/src/data/service_locator.dart';
+import 'package:news_app/src/views/show_selected_sources.dart';
 import 'package:provider/provider.dart';
 
 class SourcesPage extends StatelessWidget {
