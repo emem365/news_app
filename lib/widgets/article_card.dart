@@ -29,22 +29,23 @@ class ArticleCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (article.urlToImage!=null) Container(
-              constraints: BoxConstraints(minHeight: 150),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-                child: CachedNetworkImage(
-                  fit: BoxFit.fitWidth,
-                  imageUrl: article.urlToImage,
-                  progressIndicatorBuilder: (context, _, downloadProgress) =>
-                      Center(
-                          child: CircularProgressIndicator(
-                              value: downloadProgress.progress)),
-                  errorWidget: (context, _, __) =>
-                      Center(child: Icon(Icons.error)),
+            if (article.urlToImage != null && article.urlToImage != "")
+              Container(
+                constraints: BoxConstraints(minHeight: 150),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.fitWidth,
+                    imageUrl: article.urlToImage,
+                    progressIndicatorBuilder: (context, _, downloadProgress) =>
+                        Center(
+                            child: CircularProgressIndicator(
+                                value: downloadProgress.progress)),
+                    errorWidget: (context, _, __) =>
+                        Center(child: Icon(Icons.error)),
+                  ),
                 ),
               ),
-            ),
             Padding(
               padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
               child: Text(
@@ -77,25 +78,25 @@ class ArticleCard extends StatelessWidget {
     );
   }
 
-  Widget _buildPublishedAtRow(TextTheme _textTheme){
+  Widget _buildPublishedAtRow(TextTheme _textTheme) {
     DateTime dateTime = DateTime.parse(article.publishedAt).toLocal();
     return Row(
-        children: <Widget>[
-          Expanded(
-            child: Text(
-              'Date : ${dateFormat.format(dateTime)}',
-              softWrap: true,
-              style: _textTheme.subtitle1,
-            ),
+      children: <Widget>[
+        Expanded(
+          child: Text(
+            'Date : ${dateFormat.format(dateTime)}',
+            softWrap: true,
+            style: _textTheme.subtitle1,
           ),
-          Expanded(
-            child: Text(
-              'Time : ${dateTime.hour}:${dateTime.minute} ${dateTime.timeZoneName}',
-              softWrap: true,
-              style: _textTheme.subtitle1,
-            ),
+        ),
+        Expanded(
+          child: Text(
+            'Time : ${dateTime.hour}:${dateTime.minute} ${dateTime.timeZoneName}',
+            softWrap: true,
+            style: _textTheme.subtitle1,
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 }

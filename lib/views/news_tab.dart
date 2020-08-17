@@ -1,58 +1,19 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/models/article.dart';
-import 'package:news_app/data/news_api.dart';
+import 'package:news_app/controllers/news_tab_controller.dart';
 import 'package:news_app/widgets/article_card.dart';
+import 'package:provider/provider.dart';
 
-class NewsTab extends StatefulWidget {
-  final String source;
-  NewsTab({Key key, this.source}) : super(key: key);
-  @override
-  _NewsTabState createState() => _NewsTabState();
-}
-
-class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
-  bool isLoading = true;
-  int totalResults;
-  BuiltList<Article> articles;
-  bool isError = false;
-  String errorMessage = '';
-
-  Future<void> loadArticles() => NewsAPI.create()
-          .getTopHeadlinesFromSource(widget.source)
-          .then((response) {
-        if (mounted)
-          setState(() {
-            isLoading = false;
-            isError = false;
-            totalResults = response.body.totalResults;
-            articles = response.body.articles;
-          });
-      }, onError: (error) {
-        if (mounted)
-          setState(() {
-            isLoading = false;
-            isError = true;
-            errorMessage = '$error';
-          });
-      });
-
-  @override
-  bool get wantKeepAlive => true;
-  @override
-  void initState() {
-    super.initState();
-    loadArticles();
-  }
-
+class NewsTab extends StatelessWidget {
+  NewsTab({Key key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-    return isLoading
+    final controller= Provider.of<NewsTabController>(context);    
+    return controller.isLoading
         ? Center(child: CircularProgressIndicator())
         : RefreshIndicator(
-            onRefresh: loadArticles,
-            child: isError
+            onRefresh: controller.loadArticles,
+            child: controller.isError
                 ? ListView(
                     padding: EdgeInsets.only(top: 20),
                     children: [
@@ -64,9 +25,9 @@ class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
                     ],
                   )
                 : ListView.builder(
-                    itemCount: totalResults,
+                    itemCount: controller.totalResults,
                     itemBuilder: (BuildContext context, int index) =>
-                        ArticleCard(articles[index]),
+                        ArticleCard(controller.articles[index]),
                   ),
           );
   }

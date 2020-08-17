@@ -26,7 +26,11 @@ class PersistentDatabase extends _$PersistentDatabase {
 
   Stream<List<PersistentSource>> watchAllPersistentSources() =>
       select(persistentSources).watch();
-
+  Stream<PersistentSource> watchPersistentSourceIfExists(
+          PersistentSource persistentSource) =>
+      (select(persistentSources)
+            ..where((source) => source.id.equals(persistentSource.id)))
+          .watchSingle();
   Future insertPersistentSource(PersistentSource persistentSource) =>
       into(persistentSources).insert(persistentSource);
 
