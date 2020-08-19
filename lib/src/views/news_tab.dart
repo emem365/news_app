@@ -5,10 +5,18 @@ import 'package:provider/provider.dart';
 
 class NewsTab extends StatelessWidget {
   NewsTab({Key key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
-    final controller= Provider.of<NewsTabController>(context);    
+    final scrollController = ScrollController();
+    final controller = Provider.of<NewsTabController>(context);
+    scrollController.addListener(() {
+      if (scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent) {
+        controller.loadArticles();
+      }
+    });
+
     return controller.isLoading
         ? Center(child: CircularProgressIndicator())
         : RefreshIndicator(
@@ -25,10 +33,24 @@ class NewsTab extends StatelessWidget {
                     ],
                   )
                 : ListView.builder(
-                    itemCount: controller.totalResults,
-                    itemBuilder: (BuildContext context, int index) =>
-                        ArticleCard(controller.articles[index]),
-                  ),
+                  controller: scrollController,
+                    itemCount: controller.articles.length+1,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index == controller.totalResults)
+                        return Center(
+                          child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('You\'re all caught up today')),
+                        );
+                      if (index == controller.articles.length)
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      return ArticleCard(controller.articles[index]);
+                    }),
           );
   }
 }

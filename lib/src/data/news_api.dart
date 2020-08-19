@@ -26,8 +26,8 @@ abstract class NewsAPI extends ChopperService {
     @Query('to') String to,
     @Query('language') String language,
     @Query('sortBy') String sortBy,
-    @Query('pageSize') String pageSize,
-    @Query('page') String page,
+    @Query('pageSize') int pageSize,
+    @Query('page') int page,
   });
 
   @Get(path: '/top-headlines')

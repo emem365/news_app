@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:built_collection/built_collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:news_app/src/data/news_api.dart';
 import 'package:news_app/src/data/persistent_database.dart';
@@ -14,9 +13,11 @@ class NewsTabController extends ChangeNotifier {
 
   bool isLoading = true;
   int totalResults;
-  BuiltList<Article> articles;
+  List<Article> articles = [];
   bool isError = false;
   String errorMessage = '';
+  int pageSize = 10;
+  int get page => (articles?.length ?? 0) ~/ pageSize;
 
   Future<void> firstLoad() async {
     isLoading = true;
@@ -27,15 +28,24 @@ class NewsTabController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loadArticles() =>
-      locator<NewsAPI>().getTopHeadlinesFromSource(source.id).then((response) {
-        isError = false;
-        totalResults = response.body.totalResults;
-        articles = response.body.articles;
-        notifyListeners();
-      }, onError: (error) {
-        isError = true;
-        errorMessage = '$error';
-        notifyListeners();
-      });
+  Future<void> loadArticles() {
+    if (articles.length == totalResults) {
+      return null;
+    }
+    return locator<NewsAPI>().getEverything(
+      pageSize: pageSize,
+      page: page + 1,
+      sources: [source.id],
+    ).then((response) {
+      isError = false;
+      totalResults = response.body.totalResults;
+      articles.addAll(response.body.articles);
+      debugPrint('notifying');
+      notifyListeners();
+    }, onError: (error) {
+      isError = true;
+      errorMessage = '$error';
+      notifyListeners();
+    });
+  }
 }

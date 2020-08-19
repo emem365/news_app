@@ -40,8 +40,8 @@ class _$NewsAPI extends NewsAPI {
       String to,
       String language,
       String sortBy,
-      String pageSize,
-      String page}) {
+      int pageSize,
+      int page}) {
     final $url = '/everything';
     final $params = <String, dynamic>{
       'q': query,

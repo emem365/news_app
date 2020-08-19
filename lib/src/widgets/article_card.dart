@@ -28,7 +28,7 @@ class ArticleCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (article.urlToImage != null && article.urlToImage != "")
+            if (article.urlToImage != null && article.urlToImage != "" && article.urlToImage!='null')
               Container(
                 constraints: BoxConstraints(minHeight: 150),
                 child: ClipRRect(

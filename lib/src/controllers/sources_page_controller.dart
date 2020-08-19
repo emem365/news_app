@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:built_collection/built_collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:news_app/src/data/news_api.dart';
 import 'package:news_app/src/data/service_locator.dart';
@@ -10,7 +9,7 @@ class SourcesPageController extends ChangeNotifier {
     scheduleMicrotask(firstLoad);
   }
   bool showSelected = false;
-  BuiltList<Source> sources;
+  List<Source> sources;
   bool isError = false;
   String errorMessage = '';
   bool isLoading = true;
@@ -27,7 +26,7 @@ class SourcesPageController extends ChangeNotifier {
   Future<void> loadSources() =>
       locator<NewsAPI>().getSources().then((response) {
         isError = false;
-        sources = response.body.sources;
+        sources = List.from(response.body.sources);
         notifyListeners();
       }, onError: (error) {
         isError = true;

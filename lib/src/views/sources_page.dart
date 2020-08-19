@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/src/controllers/news_notifier.dart';
 import 'package:news_app/src/controllers/sources_page_controller.dart';
 import 'package:news_app/src/data/persistent_database.dart';
 import 'package:news_app/src/data/service_locator.dart';
@@ -9,6 +10,7 @@ class SourcesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<SourcesPageController>(context);
+    final newsNotifier = Provider.of<NewsNotifier>(context);
     final _database = locator<PersistentDatabase>();
     return WillPopScope(
       onWillPop: () async {
@@ -21,7 +23,7 @@ class SourcesPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Sources',
+            controller.showSelected ? 'Sources' : 'Subscribed Sources',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -31,7 +33,7 @@ class SourcesPage extends StatelessWidget {
           onPressed: controller.toggleShowSelected,
           label: controller.showSelected
               ? Text('Show All')
-              : Text('Show Selected'),
+              : Text('Show Subscribed'),
           icon: controller.showSelected
               ? Icon(Icons.check_box_outline_blank)
               : Icon(Icons.check_box),
@@ -56,31 +58,22 @@ class SourcesPage extends StatelessWidget {
                         : ListView.builder(
                             itemCount: controller.sources.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return StreamBuilder<PersistentSource>(
-                                stream: _database
-                                    .watchPersistentSourceIfExists(
-                                        persistentSourceFromSource(controller
-                                                .sources[
-                                            index])), //TODO: Stream to see if exists
-                                builder: (_, snapshot) {
-                                  bool isSelected =
-                                      snapshot.data == null ? false : true;
-                                  return SwitchListTile(
-                                    title: Text(controller.sources[index].name),
-                                    value: isSelected,
-                                    onChanged: (_) {
-                                      if (isSelected)
-                                        _database
-                                            .deletePersistentSource(
-                                                persistentSourceFromSource(
-                                                    controller.sources[index]));
-                                      else
-                                        _database
-                                            .insertPersistentSource(
-                                                persistentSourceFromSource(
-                                                    controller.sources[index]));
-                                    },
-                                  );
+                              bool isSelected = newsNotifier
+                                  .subscribedSourcesController.persistentSources
+                                  .contains(persistentSourceFromSource(
+                                      controller.sources[index]));
+                              return SwitchListTile(
+                                title: Text(controller.sources[index].name),
+                                value: isSelected,
+                                onChanged: (_) {
+                                  if (isSelected)
+                                    _database.deletePersistentSource(
+                                        persistentSourceFromSource(
+                                            controller.sources[index]));
+                                  else
+                                    _database.insertPersistentSource(
+                                        persistentSourceFromSource(
+                                            controller.sources[index]));
                                 },
                               );
                             }),
@@ -89,4 +82,3 @@ class SourcesPage extends StatelessWidget {
     );
   }
 }
-

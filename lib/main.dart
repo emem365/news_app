@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app/src/controllers/news_notifier.dart';
 import 'package:news_app/src/controllers/sources_page_controller.dart';
 import 'package:news_app/src/data/service_locator.dart';
-import 'package:news_app/src/views/home_page.dart';
+import 'package:news_app/src/views/splash.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -16,8 +17,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<SourcesPageController>(
-      create: (_)=>SourcesPageController(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<NewsNotifier>(create: (_)=>NewsNotifier(),),
+        ChangeNotifierProvider<SourcesPageController>(create: (_)=>SourcesPageController(),),
+      ],
       child: MaterialApp(
         title: 'News',
         theme: ThemeData(
@@ -30,7 +34,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme),
         ),
-        home: HomePage(title: 'News App'),
+        home: Splash(),
       ),
     );
   }
