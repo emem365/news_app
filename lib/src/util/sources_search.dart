@@ -30,7 +30,8 @@ class SourcesSearch extends SearchDelegate {
     final _database = locator<PersistentDatabase>();
     if (query == '') return Center(child: Text('Enter keyword'));
     List results = sources
-        .where((element) => element.name.contains(query))
+        .where((element) =>
+            element.name.toLowerCase().contains(query.toLowerCase()))
         .toList();
     if (results.length == 0)
       return Align(
@@ -67,7 +68,8 @@ class SourcesSearch extends SearchDelegate {
     final sources = Provider.of<SourcesPageController>(context).sources;
     if (query == '') return Center(child: Text('Enter keyword'));
     List results = sources
-        .where((element) => element.name.contains(query))
+        .where((element) =>
+            element.name.toLowerCase().contains(query.toLowerCase()))
         .map<Widget>(
           (source) => ListTile(
             title: Text(source.name),
