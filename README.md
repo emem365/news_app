@@ -2,16 +2,19 @@
 
 <img src="previews/home.jpg" width="250"/> <img src="previews/webview.jpg" width="250"/> 
 
-A demo news application which will get top headlines from all your favourite sources! API in use can be found at [News API](https://newsapi.org/)
+Zero bloatware and ads. Just News.
+
+A news application which will get top headlines from all your favourite sources! API in use can be found at [News API](https://newsapi.org/)
 
 
 ## Getting Started
 
-This is simple flutter project. If you want to mess around with the code, clone the repo: https://github.com/emem365/news_app.git
+This is flutter project. If you want to mess around with the code, clone the repo: https://github.com/emem365/news_app.git
 
 ### Prerequisites
 
 All you need to get this project running is to set up flutter in your system. To get started with flutter visit [here](https://flutter.dev/docs/get-started/install)
+Also. Get an api key from [NewsAPI](https://newsapi.org/) if you want to try it out yourself
 
 ### Installing
 
