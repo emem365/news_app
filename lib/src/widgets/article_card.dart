@@ -28,13 +28,15 @@ class ArticleCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (article.urlToImage != null && article.urlToImage != "" && article.urlToImage!='null')
-              Container(
-                constraints: BoxConstraints(minHeight: 150),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(16)),
+            if (article.urlToImage != null &&
+                article.urlToImage != "" &&
+                article.urlToImage != 'null')
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                child: Container(
+                  constraints: BoxConstraints.expand(height: 250),
                   child: CachedNetworkImage(
-                    fit: BoxFit.fitWidth,
+                    fit: BoxFit.cover,
                     imageUrl: article.urlToImage,
                     progressIndicatorBuilder: (context, _, downloadProgress) =>
                         Center(
