@@ -3,7 +3,7 @@ import 'package:news_app/src/controllers/news_notifier.dart';
 import 'package:news_app/src/controllers/sources_page_controller.dart';
 import 'package:news_app/src/data/persistent_database.dart';
 import 'package:news_app/src/data/service_locator.dart';
-import 'package:news_app/src/views/show_selected_sources.dart';
+import 'package:news_app/src/views/show_subscribed_sources.dart';
 import 'package:provider/provider.dart';
 
 class SourcesPage extends StatelessWidget {
@@ -14,8 +14,8 @@ class SourcesPage extends StatelessWidget {
     final _database = locator<PersistentDatabase>();
     return WillPopScope(
       onWillPop: () async {
-        if (controller.showSelected) {
-          controller.toggleShowSelected();
+        if (controller.showSubscribed) {
+          controller.toggleShowSubscribed();
           return false;
         } else
           return true;
@@ -23,23 +23,23 @@ class SourcesPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            controller.showSelected ? 'Sources' : 'Subscribed Sources',
+            controller.showSubscribed ? 'Sources' : 'Subscribed Sources',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           leading: BackButton(),
         ),
         floatingActionButton: FloatingActionButton.extended(
-          onPressed: controller.toggleShowSelected,
-          label: controller.showSelected
+          onPressed: controller.toggleShowSubscribed,
+          label: controller.showSubscribed
               ? Text('Show All')
               : Text('Show Subscribed'),
-          icon: controller.showSelected
+          icon: controller.showSubscribed
               ? Icon(Icons.check_box_outline_blank)
               : Icon(Icons.check_box),
         ),
-        body: controller.showSelected
-            ? ShowSelectedSources()
+        body: controller.showSubscribed
+            ? ShowSubscribedSources()
             : controller.isLoading
                 ? Center(child: CircularProgressIndicator())
                 : RefreshIndicator(
@@ -58,15 +58,15 @@ class SourcesPage extends StatelessWidget {
                         : ListView.builder(
                             itemCount: controller.sources.length,
                             itemBuilder: (BuildContext context, int index) {
-                              bool isSelected = newsNotifier
+                              bool isSubscribed = newsNotifier
                                   .subscribedSourcesController.persistentSources
                                   .contains(persistentSourceFromSource(
                                       controller.sources[index]));
                               return SwitchListTile(
                                 title: Text(controller.sources[index].name),
-                                value: isSelected,
+                                value: isSubscribed,
                                 onChanged: (_) {
-                                  if (isSelected)
+                                  if (isSubscribed)
                                     _database.deletePersistentSource(
                                         persistentSourceFromSource(
                                             controller.sources[index]));

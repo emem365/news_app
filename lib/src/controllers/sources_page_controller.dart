@@ -8,7 +8,7 @@ class SourcesPageController extends ChangeNotifier {
   SourcesPageController() {
     scheduleMicrotask(firstLoad);
   }
-  bool showSelected = false;
+  bool showSubscribed = false;
   List<Source> sources;
   bool isError = false;
   String errorMessage =
@@ -42,8 +42,8 @@ class SourcesPageController extends ChangeNotifier {
     }
   }
 
-  void toggleShowSelected() {
-    showSelected = !showSelected;
+  void toggleShowSubscribed() {
+    showSubscribed = !showSubscribed;
     notifyListeners();
   }
 }

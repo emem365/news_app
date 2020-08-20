@@ -5,7 +5,7 @@ import 'package:news_app/src/data/service_locator.dart';
 import 'package:news_app/src/widgets/dialog_box.dart';
 import 'package:provider/provider.dart';
 
-class ShowSelectedSources extends StatelessWidget {
+class ShowSubscribedSources extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final newsNotifier = Provider.of<NewsNotifier>(context);
@@ -17,7 +17,7 @@ class ShowSelectedSources extends StatelessWidget {
     if (sources.length == 0)
       return Center(
         child: Text(
-          'You have no selected sources. Add some!',
+          'You have no subscribed sources. Add some!',
           style: Theme.of(context).textTheme.bodyText1,
           textAlign: TextAlign.center,
         ),
@@ -43,8 +43,6 @@ class ShowSelectedSources extends StatelessWidget {
                 if (response == DialogOptions.approve) {
                   locator<PersistentDatabase>()
                       .deletePersistentSource(sources[index]);
-                } else {
-                  print('Aborted');
                 }
               });
         });

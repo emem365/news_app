@@ -36,15 +36,7 @@ class AppDrawer extends StatelessWidget {
             onTap: () {},
           ),
           ListTile(
-            title: Text('View News by region'),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('View News by language'),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('Select your sources'),
+            title: Text('Source Subsciptions'),
             onTap: () {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => SourcesPage()));
