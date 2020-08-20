@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/src/controllers/about_data.dart';
+import 'package:news_app/src/views/about.dart';
 import 'package:news_app/src/views/sources_page.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -14,12 +16,12 @@ class AppDrawer extends StatelessWidget {
                   height: 100,
                   width: double.infinity,
                   child: Image.asset(
-                    'assets/appIcon-adaptive.png',
+                    AboutData.logoAsset,
                     fit: BoxFit.fitHeight,
                   ),
                 ),
                 Text(
-                  'News App',
+                  AboutData.appName,
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1
@@ -45,7 +47,10 @@ class AppDrawer extends StatelessWidget {
           Divider(),
           ListTile(
             title: Text('ABOUT NEWS APP'),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => AboutApp()));
+            },
           ),
           Spacer(),
           Padding(

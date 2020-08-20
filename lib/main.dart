@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/src/controllers/news_notifier.dart';
 import 'package:news_app/src/controllers/sources_page_controller.dart';
 import 'package:news_app/src/data/service_locator.dart';
+import 'package:news_app/src/views/about.dart';
 import 'package:news_app/src/views/splash.dart';
 import 'package:provider/provider.dart';
 
