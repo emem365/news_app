@@ -15,11 +15,13 @@ class NewsTabController extends ChangeNotifier {
   int totalResults;
   List<Article> articles = [];
   bool isError = false;
-  String errorMessage = 'Something went wrong :(\n Please check your internet connection and try again.';
+  String errorMessage =
+      'Something went wrong :(\n Please check your internet connection and try again.';
   int pageSize = 10;
   int get page => (articles?.length ?? 0) ~/ pageSize;
 
   Future<void> firstLoad() async {
+            debugPrint('notifying for $source');
     isLoading = true;
     isError = false;
     notifyListeners();
@@ -28,24 +30,29 @@ class NewsTabController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loadArticles() {
+  Future<void> loadArticles() async {
     if (articles.length == totalResults) {
       return null;
     }
-    return locator<NewsAPI>().getEverything(
-      pageSize: pageSize,
-      page: page + 1,
-      sources: [source.id],
-    ).then((response) {
-      isError = false;
-      totalResults = response.body.totalResults;
-      articles.addAll(response.body.articles);
-      debugPrint('notifying');
-      notifyListeners();
-    }, onError: (error) {
+    try {
+      await locator<NewsAPI>().getEverything(
+        pageSize: pageSize,
+        page: page + 1,
+        sources: [source.id],
+      ).then((response) {
+        isError = false;
+        totalResults = response.body.totalResults;
+        articles.addAll(response.body.articles);
+        notifyListeners();
+      }, onError: (error) {
+        isError = true;
+        errorMessage = '$error';
+        notifyListeners();
+      });
+    } catch (e) {
       isError = true;
-      errorMessage = '$error';
+      errorMessage = '$e';
       notifyListeners();
-    });
+    }
   }
 }

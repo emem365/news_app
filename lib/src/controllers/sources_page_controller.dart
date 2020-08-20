@@ -11,7 +11,8 @@ class SourcesPageController extends ChangeNotifier {
   bool showSelected = false;
   List<Source> sources;
   bool isError = false;
-  String errorMessage = 'Something went wrong :(\n Please check your internet connection and try again.';
+  String errorMessage =
+      'Something went wrong :(\n Please check your internet connection and try again.';
   bool isLoading = true;
 
   Future<void> firstLoad() async {
@@ -23,8 +24,9 @@ class SourcesPageController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loadSources() =>
-      locator<NewsAPI>().getSources().then((response) {
+  Future<void> loadSources() async {
+    try {
+      await locator<NewsAPI>().getSources().then((response) {
         isError = false;
         sources = List.from(response.body.sources);
         notifyListeners();
@@ -33,7 +35,14 @@ class SourcesPageController extends ChangeNotifier {
         errorMessage = '$error';
         notifyListeners();
       });
-  void toggleShowSelected(){
+    } catch (e) {
+      isError = true;
+      errorMessage = '$e';
+      notifyListeners();
+    }
+  }
+
+  void toggleShowSelected() {
     showSelected = !showSelected;
     notifyListeners();
   }
