@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/src/controllers/news_notifier.dart';
+import 'package:news_app/src/util/news_search.dart';
 import 'package:news_app/src/views/news_tab.dart';
 import 'package:news_app/src/views/sources_page.dart';
 import 'package:news_app/src/widgets/app_drawer.dart';
@@ -16,6 +17,15 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: Text(title),
           centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () => showSearch(
+                context: context,
+                delegate: NewsSearch(),
+              ),
+            ),
+          ],
         ),
         drawer: AppDrawer(),
         body: newsNotifier.isLoading
