@@ -11,7 +11,7 @@ class SourcesPageController extends ChangeNotifier {
   bool showSelected = false;
   List<Source> sources;
   bool isError = false;
-  String errorMessage = '';
+  String errorMessage = 'Something went wrong :(\n Please check your internet connection and try again.';
   bool isLoading = true;
 
   Future<void> firstLoad() async {

@@ -3,7 +3,7 @@ import 'package:news_app/src/controllers/news_tab_controller.dart';
 import 'package:news_app/src/controllers/subscribed_sources_controller.dart';
 
 class NewsNotifier extends ChangeNotifier {
-  NewsNotifier(){
+  NewsNotifier() {
     subscribedSourcesController = SubscribedSourcesController()
       ..addListener(onSourcesChange);
   }
@@ -16,5 +16,12 @@ class NewsNotifier extends ChangeNotifier {
         .map((source) => NewsTabController(source))
         .toList();
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    subscribedSourcesController.dispose();
+    newsTabs?.forEach((element) => element?.dispose());
+    super.dispose();
   }
 }

@@ -15,7 +15,7 @@ class NewsTabController extends ChangeNotifier {
   int totalResults;
   List<Article> articles = [];
   bool isError = false;
-  String errorMessage = '';
+  String errorMessage = 'Something went wrong :(\n Please check your internet connection and try again.';
   int pageSize = 10;
   int get page => (articles?.length ?? 0) ~/ pageSize;
 

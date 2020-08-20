@@ -29,4 +29,10 @@ class SubscribedSourcesController extends ChangeNotifier {
     errorMessage = error.toString();
     notifyListeners();
   }
+
+  @override
+  void dispose() {
+    persistentSourcesSubscription.cancel();
+    super.dispose();
+  }
 }
