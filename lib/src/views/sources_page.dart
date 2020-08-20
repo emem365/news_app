@@ -1,12 +1,8 @@
-import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/src/controllers/news_notifier.dart';
 import 'package:news_app/src/controllers/sources_page_controller.dart';
-import 'package:news_app/src/controllers/subscribed_sources_controller.dart';
 import 'package:news_app/src/data/persistent_database.dart';
 import 'package:news_app/src/data/service_locator.dart';
-import 'package:news_app/src/models/source.dart';
-import 'package:news_app/src/models/sources_response.dart';
 import 'package:news_app/src/util/sources_search.dart';
 import 'package:news_app/src/views/show_subscribed_sources.dart';
 import 'package:provider/provider.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/src/controllers/about_data.dart';
 import 'package:news_app/src/controllers/news_notifier.dart';
 import 'package:news_app/src/views/home_page.dart';
 import 'package:progress_indicators/progress_indicators.dart';
@@ -17,12 +18,12 @@ class _SplashState extends State<Splash> {
   }
 
   pushIfReady() {
-      delay().then((value) => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(title: 'News App'),
-        ),
-      ));
+    delay().then((value) => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomePage(title: 'News App'),
+          ),
+        ));
   }
 
   @override
@@ -35,25 +36,36 @@ class _SplashState extends State<Splash> {
     final newsNotifier = Provider.of<NewsNotifier>(context);
 
     if(!newsNotifier.isLoading)
-      pushIfReady();
+    pushIfReady();
     return Material(
       color: Theme.of(context).primaryColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
+          Spacer(),
+          SizedBox(
+            height: 150,
+            width: double.infinity,
+            child: Image.asset(
+              AboutData.logoAsset,
+              fit: BoxFit.fitHeight,
+              color: Colors.white70,
+            ),
+          ),
           Text(
-            'NewsApp',
-            textAlign: TextAlign.center,
+            AboutData.appName,
+            style: Theme.of(context)
+                .textTheme
+                .headline4
+                .copyWith(color: Colors.white70),
           ),
-          SizedBox(
-            height: 150,
-          ),
-          JumpingDotsProgressIndicator(
-            fontSize: 48,
-            color: Colors.white70,
-          ),
-          SizedBox(
-            height: 150,
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 100.0),
+            child: JumpingDotsProgressIndicator(
+              fontSize: 48,
+              color: Colors.white70,
+            ),
           ),
         ],
       ),
