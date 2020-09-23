@@ -21,7 +21,7 @@ class _SplashState extends State<Splash> {
     delay().then((value) => Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => HomePage(title: 'News App'),
+            builder: (context) => HomePage(title: AboutData.appName),
           ),
         ));
   }
@@ -40,9 +40,8 @@ class _SplashState extends State<Splash> {
     return Material(
       color: Theme.of(context).primaryColor,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          Spacer(),
+          SizedBox(height: 200),
           SizedBox(
             height: 150,
             width: double.infinity,
@@ -59,14 +58,11 @@ class _SplashState extends State<Splash> {
                 .headline4
                 .copyWith(color: Colors.white70),
           ),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 100.0),
-            child: JumpingDotsProgressIndicator(
-              fontSize: 48,
+          SizedBox(height: 200),
+          JumpingDotsProgressIndicator(
+              fontSize: 36,
               color: Colors.white70,
             ),
-          ),
         ],
       ),
     );

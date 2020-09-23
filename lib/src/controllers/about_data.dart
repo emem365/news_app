@@ -1,6 +1,6 @@
 class AboutData {
   static String logoAsset = 'assets/appIcon-adaptive.png';
-  static String appName = 'News App';
+  static String appName = 'NewsOnly';
   static List<String> content = [
     "Built using Flutter, Google’s UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase, this mobile application receives data from the \"News API\"",
     'This is an open-source project. Any and all the help is appreciable. Click the link below to find the GitHub Repository. You can also file issues or request features on the GitHub repo'
