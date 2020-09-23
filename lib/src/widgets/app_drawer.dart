@@ -38,7 +38,7 @@ class AppDrawer extends StatelessWidget {
             onTap: () {},
           ),
           ListTile(
-            title: Text('Source Subsciptions'),
+            title: Text('Source Subscriptions'),
             onTap: () {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => SourcesPage()));
@@ -55,7 +55,7 @@ class AppDrawer extends StatelessWidget {
           Spacer(),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('Version: 1.1'),
+            child: Text('Version: 1.1.1'),
           ),
         ],
       ),
