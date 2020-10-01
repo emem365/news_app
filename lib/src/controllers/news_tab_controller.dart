@@ -39,6 +39,7 @@ class NewsTabController extends ChangeNotifier {
         pageSize: pageSize,
         page: page + 1,
         sources: [source.id],
+        language: "en",
       ).then((response) {
         isError = false;
         totalResults = response.body.totalResults;

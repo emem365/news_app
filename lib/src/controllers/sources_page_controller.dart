@@ -26,7 +26,7 @@ class SourcesPageController extends ChangeNotifier {
 
   Future<void> loadSources() async {
     try {
-      await locator<NewsAPI>().getSources().then((response) {
+      await locator<NewsAPI>().getSources(language: 'en').then((response) {
         isError = false;
         sources = List.from(response.body.sources);
         notifyListeners();
