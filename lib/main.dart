@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           cardColor: Color(0xFFEFEFEF),
           indicatorColor: Color(0xFF3454D1),
           buttonColor: Color(0xFF3454D1),
-          accentColor: Color(0xFF3454D1),
+          accentColor: Color(0xFF4161E0),
           appBarTheme: AppBarTheme(elevation: 0),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme),
