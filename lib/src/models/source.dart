@@ -4,6 +4,7 @@ import 'package:built_value/serializer.dart';
 part 'source.g.dart';
 
 abstract class Source implements Built<Source, SourceBuilder> {
+  @nullable
   String get id;
   String get name;
   @nullable
