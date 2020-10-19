@@ -35,6 +35,10 @@ flutter run
 
 * **Madhur Maurya** - *Creator* - [emem365](https://github.com/emem365)
 
+## Contributing
+
+If you wish to contribute a change to any of the existing features in this repo, please review our [contribution guide](https://github.com/Kunal1198/news_app/blob/contributing/CONTRIBUTING.md)
+
 
 ## Acknowledgments
 
