@@ -39,3 +39,7 @@ flutter run
 ## Acknowledgments
 
 * Again, a huge thanks to https://newsapi.org/ whose free api we use :)
+
+## Contributing
+
+* If you'd like to contribute to this repository, please read [Contributing.md](https://github.com/emem365/news_app/blob/master/CONTRIBUTING.md)
