@@ -18,11 +18,15 @@ class _$SourceSerializer implements StructuredSerializer<Source> {
   Iterable<Object> serialize(Serializers serializers, Source object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'id',
-      serializers.serialize(object.id, specifiedType: const FullType(String)),
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
     ];
+    if (object.id != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(object.id,
+            specifiedType: const FullType(String)));
+    }
     if (object.description != null) {
       result
         ..add('description')
@@ -130,9 +134,6 @@ class _$Source extends Source {
       this.language,
       this.country})
       : super._() {
-    if (id == null) {
-      throw new BuiltValueNullFieldError('Source', 'id');
-    }
     if (name == null) {
       throw new BuiltValueNullFieldError('Source', 'name');
     }
